@@ -1,25 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyFridge</title>
-    <link rel="stylesheet"
-        href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
-    <script src="https://unpkg.com/jquery"></script>
-    <script src="https://unpkg.com/popper"></script>
-    <script src="https://unpkg.com/bootstrap"></script>
-</head>
-<body>
-    <h1>My Fridge</h1>
-    <form action="">
-        <label for="">Username:</label>
-        <input type="text" name="username" id="">
-        <br>
-        <label for="">Password:</label>
-        <input type="text" name="passwords" id="">
-        <br>
-        <button type='button' class="btn btn-primary mx-2">Sign Up!</button><a href="" class="btn btn-primary">Login</a>
-    </form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+        <div class="text-center">
+            <h1 class="display-1 my-4">Welcome to MyFridge!</h1>
+            <img src="/static/fridge.jpg" class='shadow p-2 mb-5 rounded' alt="">
+        </div>
+</div>
+{% endblock %}

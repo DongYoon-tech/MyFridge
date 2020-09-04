@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center">
+        <h2 class="display-2 my-4">SignUp</h2>
+    </div>
+    <div class='row justify-content-md-center'>
+        <div class="col col-lg-7">
+            <form method="POST">
+                {% for category, message in get_flashed_messages(with_categories=True) %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+
+                {{ form.hidden_tag() }}
+                {% for field in form if field.widget.input_type != 'hidden' %}
+                    {% for error in field.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                {{field.label(class="col-form-label")}}
+                {{ field(placeholder=field.label.text, class="form-control") }}
+                {% endfor %}
+                <div class="text-center">
+                    <button class="btn btn-info btn-lg my-2">SignUp</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

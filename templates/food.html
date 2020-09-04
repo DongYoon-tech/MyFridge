@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='container'>
+    <h2 class=" text-center display-2 my-2">Food</h2>
+    <div class='row justify-content-md-center'>
+        <div class="col col-lg-5 shadow  mb-5 rounded">
+            <form method="POST">
+            {{ form.hidden_tag() }}
+
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            {{field.label(class="col-form-label")}}
+            {{ field(placeholder=field.label.text, class="form-control") }}
+            {% endfor %}
+                <div class="text-center my-2">
+                    <button class="btn btn-success"><i class="fas fa-plus"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{%if food != [] %}
+<div class='container-fluid'>
+    <h4 class="text-center display-4 my-4">Please select the ingredients for your recipe</h4>
+        {% for category, message in get_flashed_messages(with_categories=True) %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    <ul class="list-group">
+            <table class='table table-hover'>
+                <form action="/user/recipe" id="recipeForm" method="POST">
+                {% for f in food %}
+                <tr>
+                    <td>
+                        <input type="checkbox" class="ingredient" name="ingredient" value="{{f.ingredient}}">
+                        Ingredient: {{f.ingredient}}</td>
+                    
+                        <td>Description: {{f.description}}</td>
+                        <td>Categories: {{f.categories}}</td>
+                        <td>QTY: {{f.quantity}}</td>
+                        
+                        <td>Purchase Date: {{f.purchase_date}}</td>
+                        
+                        {% if (f.expiration_date - date).days < 5%}
+                        
+                        <td class='font-weight-bold text-danger'>Expiration Date: {{f.expiration_date}}</td>
+                        {%else%}
+                        <td >Expiration Date: {{f.expiration_date}}</td>
+                        {% endif %}
+                    <td>
+                        <a href="/user/ingredient/{{f.id}}/update" class="btn btn-success">edit</a>
+                    </td>
+                    <td>
+                        
+                            <button class="delete-ingredient btn btn-danger" form="deleteForm" data-id="{{f.id}}">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                    </td>
+                </tr>
+                {% endfor %}
+                </form>
+            </table>
+        </ul>
+
+    <div class="text-center">
+        <button type="submit" class='recipe btn btn-info' form="recipeForm">Recipe!</button>
+    </div>
+
+
+</div>
+{%endif%}
+{% endblock %}
