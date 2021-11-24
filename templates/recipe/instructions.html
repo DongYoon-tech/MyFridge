@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="text-center display-2 my-4">Instructions</h2>
+
+<div class="container">
+    {% if recipe_instruction == [] %}
+    <h1 class="text-danger display-2 text-center my-4">Sorry for the inconvenience. There are no instructions for this
+        recipe at the moment</h1>
+    {% else %}
+    <p class="my-4">
+    <ul class="list-group">
+        {%for instruction in recipe_instruction%}
+
+        {% for s in instruction['steps']%}
+        <li class="list-group-item">{{s['number']}}. {{s['step']}}</li>
+        {% endfor %}
+
+        {% endfor %}
+    </ul>
+    </p>
+    {% endif %}
+    <div class="text-center">
+        <a href="/user" class="btn btn-info"><i class="far fa-hand-point-left"></i> Go Back</a>
+
+    </div>
+</div>
+{% endblock %}
