@@ -12,7 +12,7 @@ from secrets import API_KEY
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://postgres:koreguayo@localhost/ingredients"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres:///ingredients"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
